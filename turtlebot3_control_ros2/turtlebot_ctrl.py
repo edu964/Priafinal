@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import TwistStamped
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import LaserScan
 import numpy as np
@@ -25,7 +25,7 @@ class TurtlebotCtrl(Node):
 								[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
 								[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
 								[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-								[0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+								[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
 								[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
 								[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
 								[0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
@@ -37,7 +37,7 @@ class TurtlebotCtrl(Node):
 								[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 						])
 
-		self.publish_cmd_vel = self.create_publisher(Twist, "/cmd_vel", 10)
+		self.publish_cmd_vel = self.create_publisher(TwistStamped, "/cmd_vel", 10)
 		self.subscriber_odom = self.create_subscription(Odometry, "/odom", self.callback_odom, 10)
 		self.subscriber_laser = self.create_subscription(LaserScan, "/scan", self.callback_laser, 10)
 		self.timer = self.create_timer(0.5, self.cmd_vel_pub)
@@ -51,12 +51,12 @@ class TurtlebotCtrl(Node):
 
 		index_x += int(self.map.shape[0]/2)
 		index_y += int(self.map.shape[0]/2)
-
+		
 		if (index_x < 1): index_x = 1
 		if (index_x > self.map.shape[0]-1): index_x = self.map.shape[0]-1
 		if (index_y < 1): index_y = 1
 		if (index_y > self.map.shape[0]-1): index_y = self.map.shape[0]-1
-
+		
 		if (self.map[index_x][index_y] == 1):
 			self.map[index_x][index_y] = 2
 
@@ -64,11 +64,11 @@ class TurtlebotCtrl(Node):
 			self.get_logger().info("Discrete Map")
 			self.get_logger().info("\n"+str(self.map))
 
-        # Desenvlva seu codigo aqui
+                # Desenvolva seu codigo aqui
 
-		msg = Twist()
-		msg.linear.x = 0.1
-		msg.angular.z = 0.1
+		msg = TwistStamped()
+		msg.twist.linear.x = 0.1
+		msg.twist.angular.z = 0.1
 		self.publish_cmd_vel.publish(msg)
 
 	def callback_laser(self, msg):
