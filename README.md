@@ -77,5 +77,3 @@ información se implementa una máquina de estados para buscar y seguir
 paredes, evitar obstáculos y detectar oportunidades para atravesar
 sectores libres.
 
-
-C
