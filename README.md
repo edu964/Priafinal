@@ -12,6 +12,8 @@ Paquetes turtlebot3, turtlebot3_msgs y turtlebot3_simulations
 Python 3
 NumPy
 
+
+
 Preparación del workspace
 
 Para el desarrollo se utilizó el workspace:
@@ -21,6 +23,9 @@ Para el desarrollo se utilizó el workspace:
 Los paquetes necesarios se encuentran dentro de:
 
 ~/proyecto_final_tbot/src
+
+
+
 
 Estructura utilizada:
 
@@ -33,6 +38,9 @@ turtlebot3_simulations/
 build/
 install/
 log/
+
+
+
 
 Compilación
 
@@ -56,6 +64,11 @@ En una nueva terminal:
 cd ~/proyecto_final_tbot
 source install/setup.bash
 ros2 run turtlebot3_control_ros2 turtlebot_ctrl
+
+
+
+
+
 
 Arquitectura
 
