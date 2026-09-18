@@ -90,7 +90,5 @@ Código principal
 
 turtlebot3_control_ros2/turtlebot_ctrl.py
 
-Repositorio
 
-https://github.com/edu964/Priafinal
 
